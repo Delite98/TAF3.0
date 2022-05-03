@@ -3,7 +3,6 @@ package baseEntities;
 import org.openqa.selenium.WebDriver;
 import pages.DashboardPage;
 import pages.LoginPage;
-import pages.ProjectsPage;
 
 public class BaseStep {
     protected WebDriver driver;
