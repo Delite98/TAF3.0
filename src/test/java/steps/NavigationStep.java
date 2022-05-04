@@ -2,6 +2,7 @@ package steps;
 
 import baseEntities.BaseStep;
 import org.openqa.selenium.WebDriver;
+import pages.ProjectsPage;
 
 public class NavigationStep extends BaseStep {
 
