@@ -5,10 +5,14 @@ import configuration.ReadProperties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 import pages.AddProjectPage;
+import pages.DashboardPage;
 import pages.SideMenuPage;
+
+import javax.swing.*;
 
 public class CrudTest extends BaseTest {
 
@@ -25,27 +29,25 @@ public class CrudTest extends BaseTest {
         AddProjectPage addProjectPage = new AddProjectPage(driver);
 
         addProjectPage.getaccessLocator().click();
-        WebElement DefaultAccess  = driver.findElement(By.id("access"));
+        WebElement DefaultAccess = driver.findElement(By.id("access"));
         Select selectDA = new Select(DefaultAccess);
         selectDA.selectByValue("3");
 
         addProjectPage.getdefectsLocator().click();
         driver.findElement(By.id("defect_id_url")).sendKeys("defectid.url");
         driver.findElement(By.id("defect_add_url")).sendKeys("defectadd.url");
-        Thread.sleep(2000);
-        WebElement DefectPlugin = driver.findElement(By.id("defect_plugin_chzn"));
-        Select selectDP = new Select(DefectPlugin);
-        selectDP.selectByValue("Asana");
+
 
         addProjectPage.getreferencesLocator().click();
         driver.findElement(By.id("reference_id_url")).sendKeys("referencesid.url");
         driver.findElement(By.id("reference_add_url")).sendKeys("referenceadd.url");
-        WebElement ReferencePlugin = driver.findElement(By.id("reference_plugin_chzn"));
-        Select selectRP = new Select(ReferencePlugin);
-        selectRP.selectByValue("JIRA Cloud");
 
 
         addProjectPage.getuserVariablesLocator().click();
-        //driver.findElement(By.id("accept")).click();
+        driver.findElement(By.id("accept")).click();
+
+        DashboardPage dashboardPage = new DashboardPage(driver);
+
     }
+
 }
