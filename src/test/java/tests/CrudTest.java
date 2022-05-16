@@ -9,7 +9,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 import pages.AddProjectPage;
-import pages.DashboardPage;
 import pages.SideMenuPage;
 
 import javax.swing.*;
@@ -45,8 +44,6 @@ public class CrudTest extends BaseTest {
 
         addProjectPage.getuserVariablesLocator().click();
         driver.findElement(By.id("accept")).click();
-
-        DashboardPage dashboardPage = new DashboardPage(driver);
 
     }
 
