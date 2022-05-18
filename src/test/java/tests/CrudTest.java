@@ -21,7 +21,7 @@ public class CrudTest extends BaseTest {
         SideMenuPage sideMenuPage = new SideMenuPage(driver);
         sideMenuPage.getButtonAddProject().click();
 
-        driver.findElement(By.id("name")).sendKeys("DaryaS");
+        driver.findElement(By.id("name")).sendKeys("TestCreate");
         driver.findElement(By.id("announcement")).sendKeys("Test announcement");
         driver.findElement(By.id("suite_mode_single_baseline")).click();
 
@@ -30,20 +30,20 @@ public class CrudTest extends BaseTest {
         addProjectPage.getaccessLocator().click();
         WebElement DefaultAccess = driver.findElement(By.id("access"));
         Select selectDA = new Select(DefaultAccess);
-        selectDA.selectByValue("3");
+        selectDA.selectByValue("1");
 
         addProjectPage.getdefectsLocator().click();
-        driver.findElement(By.id("defect_id_url")).sendKeys("defectid.url");
-        driver.findElement(By.id("defect_add_url")).sendKeys("defectadd.url");
-
 
         addProjectPage.getreferencesLocator().click();
-        driver.findElement(By.id("reference_id_url")).sendKeys("referencesid.url");
-        driver.findElement(By.id("reference_add_url")).sendKeys("referenceadd.url");
-
 
         addProjectPage.getuserVariablesLocator().click();
         driver.findElement(By.id("accept")).click();
+
+        driver.findElement(By.id("navigation-dashboard")).click();
+        driver.findElement(By.partialLinkText("TestCreate")).click();
+
+        driver.findElement(By.id("navigation-milestones")).click();
+        driver.findElement(By.partialLinkText("Add Milestone"));
 
     }
 

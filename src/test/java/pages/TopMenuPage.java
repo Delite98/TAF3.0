@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 public class TopMenuPage extends BasePage {
     private By topPanelLocator = By.className("top-panel");
+    private By millestones = By.id("navigation-milestones");
 
     public TopMenuPage(WebDriver driver) {
         super(driver);
