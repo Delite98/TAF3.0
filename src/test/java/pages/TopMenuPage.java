@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 public class TopMenuPage extends BasePage {
 
     @FindBy (className = "top-panel")
-    public WebElement topPanelLocator;
+    public WebElement topPanel;
 
     public TopMenuPage(WebDriver driver) {
         super(driver);
@@ -17,6 +17,6 @@ public class TopMenuPage extends BasePage {
 
     @Override
     protected WebElement getPageIdentifier() {
-        return topPanelLocator;
+        return topPanel;
     }
 }

@@ -10,10 +10,10 @@ public class ProjectsOverviewPage extends BasePage {
     public SideMenuPage sideMenuPage;
 
     @FindBy (id ="chart-line-fc")
-    public WebElement chartTableLocator;
+    public WebElement chartTable;
 
     @FindBy (xpath = "//li/a[. = 'Replace']")
-    public WebElement tabLocator;
+    public WebElement tab;
 
     public ProjectsOverviewPage(WebDriver driver) {
         super(driver);
@@ -23,10 +23,10 @@ public class ProjectsOverviewPage extends BasePage {
 
     @Override
     protected WebElement getPageIdentifier() {
-        return chartTableLocator;
+        return chartTable;
     }
 
     public WebElement getTabByName(String tabName) {
-        return tabLocator;
+        return tab;
     }
 }

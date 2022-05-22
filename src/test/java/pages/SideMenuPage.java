@@ -9,7 +9,10 @@ import org.openqa.selenium.support.FindBy;
 public class SideMenuPage extends BasePage {
 
     @FindBy (id = "sidebar")
-    public WebElement sidebarLocator;
+    public WebElement sidebar;
+
+    @FindBy (id = "sidebar-projects-add")
+    public WebElement buttonAddProject;
 
     public SideMenuPage(WebDriver driver) {
         super(driver);
@@ -17,6 +20,10 @@ public class SideMenuPage extends BasePage {
 
     @Override
     protected WebElement getPageIdentifier() {
-        return sidebarLocator;
+        return sidebar;
+    }
+
+    public WebElement getButtonAddProject(){
+        return buttonAddProject;
     }
 }

@@ -26,12 +26,6 @@ public class BaseTest {
 
     protected Project mainProject;
 
-    @BeforeTest
-    public void prepareData() throws IOException {
-        Reader reader = Files.newBufferedReader(Paths.get("project.json"));
-        mainProject = new Gson().fromJson(reader, Project.class);
-    }
-
     @BeforeMethod
     public void setup() {
         driver = new BrowsersService().getDriver();
