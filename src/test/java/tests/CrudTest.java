@@ -9,6 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 import pages.AddProjectPage;
+import pages.MilestonePage;
 import pages.SideMenuPage;
 
 import javax.swing.*;
@@ -26,6 +27,7 @@ public class CrudTest extends BaseTest {
         driver.findElement(By.id("suite_mode_single_baseline")).click();
 
         AddProjectPage addProjectPage = new AddProjectPage(driver);
+        MilestonePage milestonePage = new MilestonePage(driver);
 
         addProjectPage.getaccessLocator().click();
         WebElement DefaultAccess = driver.findElement(By.id("access"));
@@ -43,8 +45,17 @@ public class CrudTest extends BaseTest {
         driver.findElement(By.partialLinkText("TestCreate")).click();
 
         driver.findElement(By.id("navigation-milestones")).click();
-        driver.findElement(By.partialLinkText("Add Milestone"));
+        driver.findElement(By.partialLinkText("Add Milestone")).click();
 
+        milestonePage.getNameInputLocator().sendKeys("My name1");
+        milestonePage.getReferencesInputLocator().sendKeys("Testing");
+        milestonePage.getDescriptionInputLocator().sendKeys("Test text");
+        milestonePage.getCompletedInputLocator().click();
+        milestonePage.getAcceptButtonLocator().submit();
+
+        driver.findElement(By.partialLinkText("My name1")).click();
+        driver.findElement(By.partialLinkText("Edit")).click();
+        driver.findElement(By.partialLinkText("Delete this milestone"));
     }
 
 }
