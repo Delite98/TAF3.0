@@ -42,7 +42,7 @@ public class LoginTest extends BaseTest {
                 new LoginPage(driver)
                         .successLogin("vsdfcdf", "sff")
                         .openProject("fytf")
-                        .getTabByName("hjvjhv").isDisplayed();
+                        .getTabByName("hjvjhv").isDisplayed()
         );
     }
 
