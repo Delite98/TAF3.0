@@ -4,6 +4,7 @@ import baseEntities.BaseTest;
 import configuration.ReadProperties;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.LoginPage;
 
 public class LoginTest extends BaseTest {
 
@@ -34,4 +35,15 @@ public class LoginTest extends BaseTest {
                 "Email/Login or Password is incorrect. Please try again.",
                 "Неверное сообщение об ошибке");
     }
+
+    @Test
+    public void successLoginInvocationsTest() {
+        Assert.assertTrue(
+                new LoginPage(driver)
+                        .successLogin("vsdfcdf", "sff")
+                        .openProject("fytf")
+                        .getTabByName("hjvjhv").isDisplayed();
+        );
+    }
+
 }
