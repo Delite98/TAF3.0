@@ -11,26 +11,35 @@ import org.testng.annotations.Test;
 import pages.AddProjectPage;
 import pages.MilestonePage;
 import pages.SideMenuPage;
+import services.WaitsService;
 
 import javax.swing.*;
+import java.time.Duration;
 
 public class CrudTest extends BaseTest {
 
     @Test
     public void CrudProjectTest() throws InterruptedException {
+        WaitsService wait = new WaitsService(driver, Duration.ofSeconds(20));
+
         loginStep.successLogin(ReadProperties.username(), ReadProperties.password());
         SideMenuPage sideMenuPage = new SideMenuPage(driver);
         sideMenuPage.getButtonAddProject().click();
 
-        driver.findElement(By.id("name")).sendKeys("TestCreate");
-        driver.findElement(By.id("announcement")).sendKeys("Test announcement");
-        driver.findElement(By.id("suite_mode_single_baseline")).click();
+        WebElement name = wait.waitForVisibilityLocatedBy(By.id("name"));
+        name.sendKeys("TestCreate");
+
+        WebElement announcement = wait.waitForVisibilityLocatedBy(By.id("announcement"));
+        announcement.sendKeys("Test announcement");
+
+        WebElement suiteMode = wait.waitForVisibilityLocatedBy(By.id("suite_mode_single_baseline"));
+        suiteMode.click();
 
         AddProjectPage addProjectPage = new AddProjectPage(driver);
         MilestonePage milestonePage = new MilestonePage(driver);
 
         addProjectPage.getaccessLocator().click();
-        WebElement DefaultAccess = driver.findElement(By.id("access"));
+        WebElement DefaultAccess = wait.waitForVisibilityLocatedBy(By.id("access"));
         Select selectDA = new Select(DefaultAccess);
         selectDA.selectByValue("1");
 
@@ -39,13 +48,20 @@ public class CrudTest extends BaseTest {
         addProjectPage.getreferencesLocator().click();
 
         addProjectPage.getuserVariablesLocator().click();
-        driver.findElement(By.id("accept")).click();
+        WebElement accept = wait.waitForVisibilityLocatedBy(By.id("accept"));
+        accept.click();
 
-        driver.findElement(By.id("navigation-dashboard")).click();
-        driver.findElement(By.partialLinkText("TestCreate")).click();
+        WebElement navigationDashboard = wait.waitForVisibilityLocatedBy(By.id("navigation-dashboard"));
+        navigationDashboard.click();
 
-        driver.findElement(By.id("navigation-milestones")).click();
-        driver.findElement(By.partialLinkText("Add Milestone")).click();
+        WebElement TestCreate = wait.waitForVisibilityLocatedBy(By.partialLinkText("TestCreate"));
+        TestCreate.click();
+
+        WebElement navigationMilestones = wait.waitForExists(By.id("navigation-milestones"));
+        navigationMilestones.click();
+
+        WebElement addMilestone = wait.waitForExists(By.partialLinkText("Add Milestone"));
+        addMilestone.click();
 
         milestonePage.getNameInputLocator().sendKeys("My name1");
         milestonePage.getReferencesInputLocator().sendKeys("Testing");
@@ -53,9 +69,19 @@ public class CrudTest extends BaseTest {
         milestonePage.getCompletedInputLocator().click();
         milestonePage.getAcceptButtonLocator().submit();
 
-        driver.findElement(By.partialLinkText("My name1")).click();
-        driver.findElement(By.partialLinkText("Edit")).click();
-        driver.findElement(By.partialLinkText("Delete this milestone"));
-    }
+        WebElement writeText = wait.waitForVisibilityLocatedBy(By.partialLinkText("My name1"));
+        writeText.click();
 
+        WebElement editText = wait.waitForVisibilityLocatedBy(By.partialLinkText("Edit"));
+        editText.click();
+
+        WebElement deleteText = wait.waitForVisibilityLocatedBy(By.partialLinkText("Delete this milestone"));
+        deleteText.click();
+
+        WebElement deleteCheckBox = wait.waitForVisibilityLocatedBy(By.cssSelector("label span+span+input[name='deleteCheckbox']"));
+        deleteCheckBox.click();
+
+        WebElement deleteAccept = wait.waitForExists(By.cssSelector("#deleteDialog div[class*='button']>a:first-child"));
+        deleteAccept.click();
+    }
 }
