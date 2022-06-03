@@ -56,6 +56,10 @@ public class CrudTest extends BaseTest {
         driver.findElement(By.partialLinkText("My name1")).click();
         driver.findElement(By.partialLinkText("Edit")).click();
         driver.findElement(By.partialLinkText("Delete this milestone"));
+
+        driver.findElement(By.partialLinkText("Delete this milestone")).click();
+        driver.findElement(By.cssSelector("label span+span+input[name='deleteCheckbox']")).click();
+        driver.findElement(By.cssSelector("#deleteDialog div[class*='button']>a:first-child")).click();
     }
 
 }
