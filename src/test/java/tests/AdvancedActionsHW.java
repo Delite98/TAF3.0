@@ -48,4 +48,17 @@ public class AdvancedActionsHW extends BaseTest{
 
     }
 
+    @Test
+    public void fileUpload(){
+        driver.get("http://the-internet.herokuapp.com/upload");
+        WaitsService wait = new WaitsService(driver, Duration.ofSeconds(10));
+
+        driver.findElement(By.id("file-upload")).sendKeys("D:\\TMS\\TAF3.0\\src\\test\\resources\\Am7UFqdhcd0.jpg");
+        wait.waitForExists(By.id("file-submit")).submit();
+
+        WebElement fileUpload = wait.waitForVisibilityLocatedBy(By.cssSelector("div div h3"));
+
+        Assert.assertEquals((fileUpload.getText()), "File Uploaded!");
+    }
+
 }
