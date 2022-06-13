@@ -1,6 +1,5 @@
-package test.api;
+package api;
 
-import api.BaseApiTest;
 import com.google.gson.Gson;
 import configuration.Endpoints;
 import configuration.ReadProperties;
