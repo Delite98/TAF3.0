@@ -1,4 +1,4 @@
-package enums;
+package models;
 
 public final class ProjectType {
 

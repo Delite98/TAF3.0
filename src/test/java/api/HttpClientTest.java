@@ -1,4 +1,4 @@
-package tests.api;
+package api;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;

@@ -1,14 +1,17 @@
-package tests.api;
+package test.api;
 
 import api.BaseApiTest;
+import com.google.gson.Gson;
 import configuration.Endpoints;
 import configuration.ReadProperties;
-import enums.ProjectType;
 import io.restassured.http.ContentType;
 import io.restassured.http.Method;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import lombok.val;
 import models.Project;
+import models.ProjectType;
 import org.apache.http.HttpStatus;
 import org.apache.http.protocol.HTTP;
 import org.testng.Assert;
@@ -18,6 +21,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
 public class TestRailApiTest extends BaseApiTest {
 
@@ -57,16 +62,13 @@ public class TestRailApiTest extends BaseApiTest {
     @Test
     public void addProjectTest() {
         Project newProject = Project.builder()
-                .name("Hell")
+                .name("WP_Test_01")
                 .build();
 
         given()
                 .body(String.format("{\n" +
                         "  \"name\": \"%s\"\n" +
                         "}", newProject.getName()))
-//                .body(String.format("{\n" +
-//                        "  \"name\": \"Hell\"\n" +
-//                        "}"))
                 .when()
                 .post(Endpoints.ADD_PROJECT)
                 .then()
@@ -77,8 +79,8 @@ public class TestRailApiTest extends BaseApiTest {
     @Test
     public void addProject2() {
         Project project = Project.builder()
-                .name("Hell")
-                .typeOfProject(enums.ProjectType.SINGLE_SUITE_MODE)
+                .name("WP_Test_02")
+                .typeOfProject(ProjectType.SINGLE_SUITE_MODE)
                 .build();
 
         Map<String, Object> jsonAsMap = new HashMap<>();
@@ -94,11 +96,10 @@ public class TestRailApiTest extends BaseApiTest {
                 .statusCode(HttpStatus.SC_OK);
     }
 
-
     @Test
     public void addProject3() {
         Project project = Project.builder()
-                .name("Hell_3")
+                .name("WP_Test_03")
                 .typeOfProject(ProjectType.MULTIPLE_SUITE_MODE)
                 .build();
 
@@ -117,5 +118,59 @@ public class TestRailApiTest extends BaseApiTest {
                 .as(Project.class);
 
         System.out.println(newProject.toString());
+        Assert.assertTrue(newProject.equals(expectedProject));
+    }
+
+    @Test
+    public void validateNameOfProjectTest() {
+        given()
+                .when()
+                .get(Endpoints.GET_PROJECTS)
+                .then()
+                .log().status()
+                .log().body()
+                .body("projects.get(0).id", is(1))
+                .body("projects.get(0).name", equalTo("WP Test"));
+    }
+
+    @Test
+    public void validateNameOfProjectTest1() {
+        JsonPath jsonPath = given()
+                .when()
+                .get(Endpoints.GET_PROJECTS)
+                .then()
+                .extract()
+                .jsonPath();
+
+        String name = jsonPath.getString("projects[0].name");
+        int id = jsonPath.getInt("projects[0].id");
+
+        Assert.assertEquals(id, 1);
+        Assert.assertEquals(name, "WP Test");
+    }
+
+    @Test
+    public void getExactProject() {
+        given()
+                .pathParam("project_id", 1)
+                .get(Endpoints.GET_PROJECT)
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK)
+                .body("id", is(1))
+                .body("name", equalTo("WP Test"));
+
+    }
+
+    @Test
+    public void getExactProjectAsObjectTest() {
+        Response response = given()
+                .pathParam("project_id", 1)
+                .get(Endpoints.GET_PROJECT);
+
+        Project actualProject = new Gson().fromJson(response.getBody().asString(),
+                Project.class);
+
+        Assert.assertEquals(actualProject.getName(), "WP Test");
     }
 }
