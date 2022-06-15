@@ -6,6 +6,9 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import services.WaitsService;
+
+import java.time.Duration;
 
 public class AdvancedActionsHW2 extends BaseTest {
 
@@ -25,8 +28,10 @@ public class AdvancedActionsHW2 extends BaseTest {
     public void iframeTest(){
         driver.get("http://the-internet.herokuapp.com/iframe");
 
-        driver.switchTo().frame("mce_0_ifr");
-        Assert.assertEquals(driver.findElement(By.id("tinymce")).getText(), "Your content goes here.");
+        WaitsService wait = new WaitsService(driver, Duration.ofSeconds(20));
+
+        driver.switchTo().frame(driver.findElement(By.id("mce_0_ifr")));
+        Assert.assertEquals(wait.waitForExists(By.id("tinymce")).getText(), "Your content goes here.");
 
     }
 }
