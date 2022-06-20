@@ -1,10 +1,12 @@
 package tests;
 
-import dbEntities.CustomersTable;
+import dbEntities.Customer;
 import org.testng.annotations.Test;
+import services.CustomerService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class dbTest extends BaseDBTest {
 
@@ -12,15 +14,7 @@ public class dbTest extends BaseDBTest {
     public void firstTest() {
         logger.info("Test is started...");
 
-        CustomersTable customersTable = new CustomersTable(dataBaseService);
-        customersTable.dropTable();
-        customersTable.createCustomersTable();
-
-        customersTable.addCustomer("Иван", "Иванов", "ivanov@test.com", 28);
-        customersTable.addCustomer("Петр", "Петров", "petrov@test.com", 38);
-        customersTable.addCustomer("Марина", "Стасевич", "marina@test.com", 23);
-
-        ResultSet rs = customersTable.getCustomers();
+        ResultSet rs = customersTable.getCustomerById(2);
 
         try {
             while (rs.next()) {
@@ -41,6 +35,18 @@ public class dbTest extends BaseDBTest {
         }
 
         logger.info("Test is completed...");
+    }
+
+    @Test
+    public void hibernateTest(){
+        CustomerService customerService = new CustomerService();
+        Customer customer = new Customer("Gleb", "Hlebov", "enrkjn@test.com", 23);
+        customerService.saveUser(customer);
+
+        List<Customer> customerList = customerService.findAllUsers();
+        for (Customer cust: customerList){
+            logger.info(cust.toString());
+        }
     }
 
 }

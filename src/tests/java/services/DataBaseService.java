@@ -11,7 +11,7 @@ public class DataBaseService {
     static final String HOST = "localhost";
     static final String PORT = "5432";
     static final String USER = "postgres";
-    static final String PSW = "1";
+    static final String PSW = "Mym@il388";
     static final String DATABASE_NAME = "postgres";
 
     static final String JDBC = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DATABASE_NAME; // создание строки соединения

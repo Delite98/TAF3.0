@@ -17,7 +17,7 @@ public class CustomersTable {
 
     public void dropTable() {
         logger.info("Удаляем customers таблицу");
-        String dropTableCustomersSQL = "DROP TABLE Customers;";
+        String dropTableCustomersSQL = "DROP TABLE public.Customers;";
 
         dataBaseService.executeSQL(dropTableCustomersSQL);
     }
@@ -25,7 +25,7 @@ public class CustomersTable {
     public void createCustomersTable() {
         logger.info("Создаем customers таблицу");
 
-        String createTableSQL = "CREATE TABLE Customers (" +
+        String createTableSQL = "CREATE TABLE public.Customers (" +
                 "ID SERIAL PRIMARY KEY, " +
                 "FirstName CHARACTER VARYING(30), " +
                 "LastName CHARACTER VARYING(30), " +
@@ -40,14 +40,20 @@ public class CustomersTable {
         logger.info("Добавляем запись в таблицу");
 
         String insertTableSQL = "INSERT INTO public.Customers(" +
-                "firstname, lastname, age)" +
-                "VALUES ('" + firstName + "', '" + lastName + "',  " + age + ");";
+                "firstname, lastname, email, age)" +
+                "VALUES ('" + firstName + "', '" + lastName + "', '" + email + "',  " + age + ");";
 
         dataBaseService.executeSQL(insertTableSQL);
     }
 
     public ResultSet getCustomers() {
         String selectSQL = "SELECT * FROM public.Customers ORDER BY id ASC;";
+
+        return dataBaseService.executeQuery(selectSQL);
+    }
+
+    public ResultSet getCustomerById(int id) {
+        String selectSQL = "SELECT * FROM public.Customers WHERE ID=" + id + " ORDER BY id ASC;";
 
         return dataBaseService.executeQuery(selectSQL);
     }
