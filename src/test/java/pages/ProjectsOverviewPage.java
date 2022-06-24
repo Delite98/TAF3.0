@@ -4,12 +4,16 @@ import baseEntities.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class ProjectsOverviewPage extends BasePage {
     public SideMenuPage sideMenuPage;
 
-    private By chartTableLocator = By.id("chart-line-fc");
-    private String tabLocator = "//li/a[. = 'Replace']";
+    @FindBy (id ="chart-line-fc")
+    public WebElement chartTableLocator;
+
+    @FindBy (xpath = "//li/a[. = 'Replace']")
+    public WebElement tabLocator;
 
     public ProjectsOverviewPage(WebDriver driver) {
         super(driver);
@@ -19,10 +23,10 @@ public class ProjectsOverviewPage extends BasePage {
 
     @Override
     protected WebElement getPageIdentifier() {
-        return driver.findElement(chartTableLocator);
+        return chartTableLocator;
     }
 
     public WebElement getTabByName(String tabName) {
-        return waitsService.waitForExists(By.xpath(tabLocator.replace("Replace", tabName)));
+        return tabLocator;
     }
 }
