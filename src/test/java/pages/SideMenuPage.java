@@ -23,7 +23,7 @@ public class SideMenuPage extends BasePage {
         return sidebar;
     }
 
-    public WebElement getButtonAddProject(){
-        return buttonAddProject;
+    public WebElement buttonAddProject() {
+        return null;
     }
 }

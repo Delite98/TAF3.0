@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class AddProjectPage extends BasePage {
+    private final static String pagePath = "/index.php?/admin/projects/add/1";
 
     @FindBy(id = "projects-tabs-project")
     public WebElement project;
@@ -23,32 +24,14 @@ public class AddProjectPage extends BasePage {
     @FindBy(id = "users-fields-fields")
     public WebElement userVariables;
 
-    public WebElement getproject() {
-        return project;
-    }
-
-    public WebElement getaccess() {
-        return access;
-    }
-
-    public WebElement getdefects() {
-        return defects;
-    }
-
-    public WebElement getreferences() {
-        return references;
-    }
-
-    public WebElement getuserVariables() {
-        return userVariables;
-    }
-
     public AddProjectPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
     protected WebElement getPageIdentifier() {
-        return null;
+        return project;
     }
+
+
 }

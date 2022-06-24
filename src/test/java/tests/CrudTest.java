@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import pages.AddProjectPage;
 import pages.MilestonePage;
 import pages.SideMenuPage;
+import steps.CrudStep;
 
 import javax.swing.*;
 
@@ -18,27 +19,26 @@ public class CrudTest extends BaseTest {
 
     @Test
     public void CrudProjectTest() throws InterruptedException {
+        CrudStep crudStep = new CrudStep(driver);
+
         loginStep.successLogin(ReadProperties.username(), ReadProperties.password());
         SideMenuPage sideMenuPage = new SideMenuPage(driver);
-        sideMenuPage.getButtonAddProject().click();
+        sideMenuPage.buttonAddProject().click();
 
         driver.findElement(By.id("name")).sendKeys("TestCreate");
         driver.findElement(By.id("announcement")).sendKeys("Test announcement");
         driver.findElement(By.id("suite_mode_single_baseline")).click();
 
-        AddProjectPage addProjectPage = new AddProjectPage(driver);
-        MilestonePage milestonePage = new MilestonePage(driver);
-
-        addProjectPage.getaccess().click();
+        crudStep.accessChapter();
         WebElement DefaultAccess = driver.findElement(By.id("access"));
         Select selectDA = new Select(DefaultAccess);
         selectDA.selectByValue("1");
 
-        addProjectPage.getdefects().click();
+        crudStep.defectsChapter();
 
-        addProjectPage.getreferences().click();
+        crudStep.referencesChapter();
 
-        addProjectPage.getuserVariables().click();
+        crudStep.userVariablesChapter();
         driver.findElement(By.id("accept")).click();
 
         driver.findElement(By.id("navigation-dashboard")).click();
@@ -47,11 +47,11 @@ public class CrudTest extends BaseTest {
         driver.findElement(By.id("navigation-milestones")).click();
         driver.findElement(By.partialLinkText("Add Milestone")).click();
 
-        milestonePage.getNameInputLocator().sendKeys("My name1");
-        milestonePage.getReferencesInputLocator().sendKeys("Testing");
-        milestonePage.getDescriptionInputLocator().sendKeys("Test text");
-        milestonePage.getCompletedInputLocator().click();
-        milestonePage.getAcceptButtonLocator().submit();
+        crudStep.mNameInput();
+        crudStep.mReferencesInput();
+        crudStep.mDescriptionInput();
+        crudStep.mCompletedInput();
+        crudStep.mAcceptButton();
 
         driver.findElement(By.partialLinkText("My name1")).click();
         driver.findElement(By.partialLinkText("Edit")).click();

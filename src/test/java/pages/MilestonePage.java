@@ -38,32 +38,4 @@ public class MilestonePage extends BasePage {
     protected WebElement getPageIdentifier() {
         return headerTitleLabel;
     }
-
-    public WebElement getNameInputLocator() {
-        return nameInput;
-    }
-
-    public WebElement getReferencesInputLocator() {
-        return referencesInput;
-    }
-
-    public WebElement getParentLocator() {
-        return parent;
-    }
-
-    public WebElement getDescriptionInputLocator() {
-       return descriptionInput;
-    }
-
-    public WebElement getCompletedInputLocator() {
-        return completedInput;
-    }
-
-    public WebElement getAcceptButtonLocator() {
-        return acceptButton;
-    }
-
-    public WebElement getHeaderTitleLabelLocator() {
-        return headerTitleLabel;
-    }
 }

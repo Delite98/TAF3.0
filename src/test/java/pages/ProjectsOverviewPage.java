@@ -25,8 +25,4 @@ public class ProjectsOverviewPage extends BasePage {
     protected WebElement getPageIdentifier() {
         return chartTable;
     }
-
-    public WebElement getTabByName(String tabName) {
-        return tab;
-    }
 }
