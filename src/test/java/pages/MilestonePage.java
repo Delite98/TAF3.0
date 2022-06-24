@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class MilestonePage extends BasePage {
-    private final static String pagePath = "/index.php?/milestones/add/48";
+    private final static String pagePath = "/index.php?/milestones";
 
     @FindBy (id = "name")
     public WebElement nameInput;

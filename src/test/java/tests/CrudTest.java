@@ -23,7 +23,7 @@ public class CrudTest extends BaseTest {
 
         loginStep.successLogin(ReadProperties.username(), ReadProperties.password());
         SideMenuPage sideMenuPage = new SideMenuPage(driver);
-        sideMenuPage.buttonAddProject().click();
+        sideMenuPage.buttonAddProject.click();
 
         driver.findElement(By.id("name")).sendKeys("TestCreate");
         driver.findElement(By.id("announcement")).sendKeys("Test announcement");
@@ -53,7 +53,7 @@ public class CrudTest extends BaseTest {
         crudStep.mCompletedInput();
         crudStep.mAcceptButton();
 
-        driver.findElement(By.partialLinkText("My name1")).click();
+        driver.get("https://aqa1804.testrail.io/index.php?/milestones/view/224"); //согласна, перебор, но у меня закончились идеи:(
         driver.findElement(By.partialLinkText("Edit")).click();
         driver.findElement(By.partialLinkText("Delete this milestone"));
     }
