@@ -1,22 +1,21 @@
 package pages;
 
 import baseEntities.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class TopMenuPage extends BasePage {
-
-    @FindBy (className = "top-panel")
-    public WebElement topPanel;
+    private By topPanelLocator = By.className("top-panel");
 
     public TopMenuPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    protected WebElement getPageIdentifier() {
-        return topPanel;
+    protected By getPageIdentifier() {
+        return topPanelLocator;
     }
+
+
 }

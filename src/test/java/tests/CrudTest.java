@@ -3,42 +3,40 @@ package tests;
 import baseEntities.BaseTest;
 import configuration.ReadProperties;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 import pages.AddProjectPage;
+import pages.LoginPage;
 import pages.MilestonePage;
 import pages.SideMenuPage;
-import steps.CrudStep;
-
-import javax.swing.*;
 
 public class CrudTest extends BaseTest {
 
     @Test
     public void CrudProjectTest() throws InterruptedException {
-        CrudStep crudStep = new CrudStep(driver);
-
-        loginStep.successLogin(ReadProperties.username(), ReadProperties.password());
+        LoginPage loginPage = new LoginPage(driver);
         SideMenuPage sideMenuPage = new SideMenuPage(driver);
-        sideMenuPage.buttonAddProject.click();
+        AddProjectPage addProjectPage = new AddProjectPage(driver);
+        MilestonePage milestonePage = new MilestonePage(driver);
+
+        loginPage.successLogin(ReadProperties.username(), ReadProperties.password());
+        sideMenuPage.buttonAddProject();
 
         driver.findElement(By.id("name")).sendKeys("TestCreate");
         driver.findElement(By.id("announcement")).sendKeys("Test announcement");
         driver.findElement(By.id("suite_mode_single_baseline")).click();
 
-        crudStep.accessChapter();
+        addProjectPage.accessChapter();
         WebElement DefaultAccess = driver.findElement(By.id("access"));
         Select selectDA = new Select(DefaultAccess);
         selectDA.selectByValue("1");
 
-        crudStep.defectsChapter();
+        addProjectPage.defectsChapter();
 
-        crudStep.referencesChapter();
+        addProjectPage.referencesChapter();
 
-        crudStep.userVariablesChapter();
+        addProjectPage.userVariablesChapter();
         driver.findElement(By.id("accept")).click();
 
         driver.findElement(By.id("navigation-dashboard")).click();
@@ -47,11 +45,12 @@ public class CrudTest extends BaseTest {
         driver.findElement(By.id("navigation-milestones")).click();
         driver.findElement(By.partialLinkText("Add Milestone")).click();
 
-        crudStep.mNameInput();
-        crudStep.mReferencesInput();
-        crudStep.mDescriptionInput();
-        crudStep.mCompletedInput();
-        crudStep.mAcceptButton();
+        milestonePage
+                .nameInput()
+                .referencesInput()
+                .descriptionInput()
+                .completedInput()
+                .acceptButton();
 
         driver.get("https://aqa1804.testrail.io/index.php?/milestones/view/224"); //согласна, перебор, но у меня закончились идеи:(
         driver.findElement(By.partialLinkText("Edit")).click();
