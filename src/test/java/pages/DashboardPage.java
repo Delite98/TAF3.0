@@ -4,6 +4,7 @@ import baseEntities.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class DashboardPage extends BasePage {
     private final static String pagePath = "/index.php?/dashboard";
@@ -11,7 +12,8 @@ public class DashboardPage extends BasePage {
     public TopMenuPage topMenuPage;
 
     // Блок описания селекторов для элементов
-    private By headerTitleLabelLocator = By.xpath("//div[contains(@class, 'content-header-title') and contains(text(), 'All Projects')]");
+    @FindBy (xpath = "//div[contains(@class, 'content-header-title') and contains(text(), 'All Projects')]")
+    public WebElement headerTitleLabel;
 
     public DashboardPage(WebDriver driver) {
         super(driver);
@@ -30,6 +32,6 @@ public class DashboardPage extends BasePage {
 
     // Блок атомарных методов
     public WebElement getHeaderTitleLabel() {
-        return waitsService.waitForExists(headerTitleLabelLocator);
+        return headerTitleLabel;
     }
 }
