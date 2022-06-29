@@ -35,6 +35,7 @@ public class CrudTest extends BaseTest {
                 .navigateDashboardButton()
                 .openMyProject(nameOfMyProject);
 
+        driver.findElement(By.id("navigation-milestones")).click();
         driver.findElement(By.partialLinkText("Add Milestone")).click();
 
         milestonePage
