@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 public class ProjectsPage extends BasePage {
     private final static String pagePath = "/index.php?/admin/projects/overview";
+    public By navigateDashboard = By.id("navigation-dashboard");
 
     public SideMenuPage sideMenuPage;
 
@@ -29,5 +30,10 @@ public class ProjectsPage extends BasePage {
     public ProjectsPage navigateToProjectsPage() {
         navigateToProjectsPage().openPageByUrl();
         return this;
+    }
+
+    public DashboardPage navigateDashboardButton(){
+        driver.findElement(navigateDashboard).click();
+        return new DashboardPage(driver);
     }
 }

@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class MilestonePage extends BasePage {
-    private final static String pagePath = "/index.php?/milestones/add/48";
+    private final static String pagePath = "/index.php?/milestones/add/";
 
     private By nameInputLocator = By.id("name");
     private By referencesInputLocator = By.id("reference");

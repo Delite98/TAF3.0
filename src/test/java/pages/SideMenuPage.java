@@ -3,10 +3,9 @@ package pages;
 import baseEntities.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class SideMenuPage extends BasePage {
-    public By sidebarLocator = By.id("sidebar");
+    public By sidebarLocator = By.id("sidebar-projects-add");
 
     public SideMenuPage(WebDriver driver) {
         super(driver);
@@ -17,8 +16,8 @@ public class SideMenuPage extends BasePage {
         return sidebarLocator;
     }
 
-    public SideMenuPage buttonAddProject(){
+    public AddProjectPage buttonAddProject(){
         driver.findElement(sidebarLocator).click();
-        return this;
+        return new AddProjectPage(driver);
     }
 }

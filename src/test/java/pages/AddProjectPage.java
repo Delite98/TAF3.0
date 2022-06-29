@@ -1,9 +1,11 @@
 package pages;
 
 import baseEntities.BasePage;
+import io.qameta.allure.internal.shadowed.jackson.databind.annotation.JsonPOJOBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 public class AddProjectPage extends BasePage {
     private By projectLocator = By.id("projects-tabs-project");
@@ -11,22 +13,11 @@ public class AddProjectPage extends BasePage {
     private By defectsLocator = By.id("projects-tabs-defects");
     private By referencesLocator = By.id("projects-tabs-references");
     private By userVariablesLocator = By.id("users-fields-fields");
-
-    public WebElement getprojectLocator(){
-        return driver.findElement(projectLocator);
-    }
-    public WebElement getaccessLocator(){
-        return driver.findElement(accessLocator);
-    }
-    public WebElement getdefectsLocator(){
-        return driver.findElement(defectsLocator);
-    }
-    public WebElement getreferencesLocator(){
-        return driver.findElement(referencesLocator);
-    }
-    public WebElement getuserVariablesLocator(){
-        return driver.findElement(userVariablesLocator);
-    }
+    private By inputNameEntry = By.id("name");
+    private By announcementEntry = By.id("announcement");
+    private By suitModeChoice = By.id("suite_mode_single");
+    private By defaultAccessChoice = By.id("access");
+    private By acceptButton = By.id("accept");
 
     public AddProjectPage(WebDriver driver) {
         super(driver);
@@ -57,4 +48,30 @@ public class AddProjectPage extends BasePage {
         return this;
     }
 
+    public AddProjectPage getInputName(String nameStatic){
+        driver.findElement(inputNameEntry).sendKeys(nameStatic);
+        return this;
+    }
+
+    public AddProjectPage getAnnouncement(String announcement){
+        driver.findElement(announcementEntry).sendKeys(announcement);
+        return this;
+    }
+
+    public AddProjectPage getSuitMode(){
+        driver.findElement(suitModeChoice).click();
+        return this;
+    }
+
+    public AddProjectPage getDefaultAccess(String value) {
+        WebElement tSuitModeChoice = driver.findElement(defaultAccessChoice);
+        Select selectDA = new Select(tSuitModeChoice);
+        selectDA.selectByValue(value);
+        return this;
+    }
+
+    public ProjectsPage getAcceptButton() {
+        driver.findElement(acceptButton).click();
+        return new ProjectsPage (driver);
+    }
 }

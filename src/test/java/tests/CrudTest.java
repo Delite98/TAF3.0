@@ -14,35 +14,27 @@ import pages.SideMenuPage;
 public class CrudTest extends BaseTest {
 
     @Test
-    public void CrudProjectTest() throws InterruptedException {
+    public void CrudProjectTest() {
         LoginPage loginPage = new LoginPage(driver);
         SideMenuPage sideMenuPage = new SideMenuPage(driver);
-        AddProjectPage addProjectPage = new AddProjectPage(driver);
         MilestonePage milestonePage = new MilestonePage(driver);
+        String nameOfMyProject = "I'm trying create this prooooject...";
 
         loginPage.successLogin(ReadProperties.username(), ReadProperties.password());
-        sideMenuPage.buttonAddProject();
+        sideMenuPage
+                .buttonAddProject()
+                .getInputName(nameOfMyProject)
+                .getAnnouncement("Test announcement")
+                .getSuitMode()
+                .accessChapter()
+                .getDefaultAccess("3")
+                .defectsChapter()
+                .referencesChapter()
+                .userVariablesChapter()
+                .getAcceptButton()
+                .navigateDashboardButton()
+                .openMyProject(nameOfMyProject);
 
-        driver.findElement(By.id("name")).sendKeys("TestCreate");
-        driver.findElement(By.id("announcement")).sendKeys("Test announcement");
-        driver.findElement(By.id("suite_mode_single_baseline")).click();
-
-        addProjectPage.accessChapter();
-        WebElement DefaultAccess = driver.findElement(By.id("access"));
-        Select selectDA = new Select(DefaultAccess);
-        selectDA.selectByValue("1");
-
-        addProjectPage.defectsChapter();
-
-        addProjectPage.referencesChapter();
-
-        addProjectPage.userVariablesChapter();
-        driver.findElement(By.id("accept")).click();
-
-        driver.findElement(By.id("navigation-dashboard")).click();
-        driver.findElement(By.partialLinkText("TestCreate")).click();
-
-        driver.findElement(By.id("navigation-milestones")).click();
         driver.findElement(By.partialLinkText("Add Milestone")).click();
 
         milestonePage

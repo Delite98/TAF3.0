@@ -41,4 +41,8 @@ public class DashboardPage extends BasePage {
         return new ProjectsOverviewPage(driver);
     }
 
+    public MilestonePage openMyProject(String nameOfMyProject){
+        driver.findElement(By.partialLinkText(nameOfMyProject));
+        return new MilestonePage(driver);
+    }
 }
