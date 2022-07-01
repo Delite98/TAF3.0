@@ -18,12 +18,12 @@ public class CrudTest extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         SideMenuPage sideMenuPage = new SideMenuPage(driver);
         MilestonePage milestonePage = new MilestonePage(driver);
-        String nameOfMyProject = "I'm trying create this prooooject...";
+        String nameOfMyProject = ;
 
         loginPage.successLogin(ReadProperties.username(), ReadProperties.password());
         sideMenuPage
                 .buttonAddProject()
-                .getInputName(nameOfMyProject)
+                .getInputName("I'm trying create this prooooject...")
                 .getAnnouncement("Test announcement")
                 .getSuitMode()
                 .accessChapter()
@@ -33,7 +33,7 @@ public class CrudTest extends BaseTest {
                 .userVariablesChapter()
                 .getAcceptButton()
                 .navigateDashboardButton()
-                .openMyProject(nameOfMyProject);
+                .openMyProject();
 
         driver.findElement(By.id("navigation-milestones")).click();
         driver.findElement(By.partialLinkText("Add Milestone")).click();
