@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 public class DashboardPage extends BasePage {
     private final static String pagePath = "/index.php?/dashboard";
 
+    ProjectPage projectPage = new ProjectPage(driver);
     public TopMenuPage topMenuPage;
 
     // Блок описания селекторов для элементов
@@ -24,9 +25,6 @@ public class DashboardPage extends BasePage {
         return headerTitleLabelLocator;
     }
 
-    public void openPageByUrl() {
-        super.openPageByUrl(pagePath);
-    }
 
     // Блок атомарных методов
     public WebElement getHeaderTitleLabel() {
@@ -41,7 +39,13 @@ public class DashboardPage extends BasePage {
         return new ProjectsOverviewPage(driver);
     }
 
-    public MilestonePage openMyProject(){
-        super.openPageByUrl(pagePath + );
+    public void setHeaderTitleLabelLocator(By headerTitleLabelLocator) {
+        this.headerTitleLabelLocator = headerTitleLabelLocator;
     }
+
+    public ProjectPage openMyProject(){
+        super.openPageByUrl(pagePath + "/");
+        return projectPage;
+    }
+
 }

@@ -11,6 +11,8 @@ import pages.LoginPage;
 import pages.MilestonePage;
 import pages.SideMenuPage;
 
+import javax.xml.transform.sax.SAXResult;
+
 public class CrudTest extends BaseTest {
 
     @Test
@@ -18,12 +20,12 @@ public class CrudTest extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         SideMenuPage sideMenuPage = new SideMenuPage(driver);
         MilestonePage milestonePage = new MilestonePage(driver);
-        String nameOfMyProject = ;
+        String nameOfMyPr = "I'm trying create this prooooject...";
 
         loginPage.successLogin(ReadProperties.username(), ReadProperties.password());
         sideMenuPage
                 .buttonAddProject()
-                .getInputName("I'm trying create this prooooject...")
+                .getInputName(nameOfMyPr)
                 .getAnnouncement("Test announcement")
                 .getSuitMode()
                 .accessChapter()
@@ -33,10 +35,10 @@ public class CrudTest extends BaseTest {
                 .userVariablesChapter()
                 .getAcceptButton()
                 .navigateDashboardButton()
-                .openMyProject();
-
-        driver.findElement(By.id("navigation-milestones")).click();
-        driver.findElement(By.partialLinkText("Add Milestone")).click();
+                .openMyProject()
+                .navigationToMilestones();
+        driver.findElement(By.partialLinkText(nameOfMyPr)).click();
+        String myProjectUrlIndex = String.valueOf(driver.getCurrentUrl().lastIndexOf(7));
 
         milestonePage
                 .nameInput()

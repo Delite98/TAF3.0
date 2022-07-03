@@ -5,9 +5,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class ProjectsPage extends BasePage {
-    private final static String pagePath = "/index.php?/admin/projects/overview";
+    String set = "/148";
+    private final static String pagePath = "/index.php?/admin/projects/overview" + "set";
     public By navigateDashboard = By.id("navigation-dashboard");
 
+    public ProjectsPage projectsPage;
     public SideMenuPage sideMenuPage;
 
     private By headerTitleLabelLocator = By.xpath("//div[contains(@class, 'content-header-title') and contains(text(), 'Projects')]");
@@ -23,12 +25,8 @@ public class ProjectsPage extends BasePage {
         return headerTitleLabelLocator;
     }
 
-    public void openPageByUrl() {
-        super.openPageByUrl(pagePath);
-    }
-
     public ProjectsPage navigateToProjectsPage() {
-        navigateToProjectsPage().openPageByUrl();
+        navigateToProjectsPage().openPageByUrl(pagePath);
         return this;
     }
 
@@ -36,4 +34,6 @@ public class ProjectsPage extends BasePage {
         driver.findElement(navigateDashboard).click();
         return new DashboardPage(driver);
     }
+
+
 }
