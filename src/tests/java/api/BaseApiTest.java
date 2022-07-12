@@ -1,13 +1,14 @@
-package api;
+package java.api;
 
 import configuration.ReadProperties;
-import helpers.ProjectHelper;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import models.Project;
-import models.ProjectType;
 import org.apache.http.protocol.HTTP;
 import org.testng.annotations.BeforeTest;
+
+import java.helpers.ProjectHelper;
+import java.models.Project;
+import java.models.ProjectType;
 
 import static io.restassured.RestAssured.given;
 

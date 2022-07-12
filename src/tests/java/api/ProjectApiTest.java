@@ -1,10 +1,10 @@
-package api;
+package java.api;
 
-import helpers.ProjectHelper;
-import models.Project;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.models.Project;
 
 public class ProjectApiTest extends BaseApiTest {
 

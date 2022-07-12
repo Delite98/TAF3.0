@@ -1,4 +1,4 @@
-package api;
+package java.api;
 
 import com.google.gson.Gson;
 import configuration.Endpoints;
@@ -8,14 +8,13 @@ import io.restassured.http.Method;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import lombok.val;
-import models.Project;
-import models.ProjectType;
 import org.apache.http.HttpStatus;
 import org.apache.http.protocol.HTTP;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.models.Project;
+import java.models.ProjectType;
 import java.util.HashMap;
 import java.util.Map;
 

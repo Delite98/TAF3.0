@@ -1,10 +1,10 @@
-package helpers;
+package java.helpers;
 
 import configuration.Endpoints;
 import io.restassured.response.Response;
-import models.Project;
 import org.apache.http.HttpStatus;
 
+import java.models.Project;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;

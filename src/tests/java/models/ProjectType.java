@@ -1,4 +1,4 @@
-package models;
+package java.models;
 
 public final class ProjectType {
 
